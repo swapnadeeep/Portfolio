@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS Dashboard UI</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    display: flex;
+    background: #f4f6f8;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background: #2f3542;
+    color: white;
+    height: 100vh;
+    padding: 30px 20px;
+    transition: width 0.3s;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #1e90ff;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 30px;
+  }
+  
+  .main h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .chart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+  
+    .main h1 {
+      font-size: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+  
+    .main {
+      padding: 15px;
+    }
+  
+    .main h1 {
+      font-size: 20px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>My SaaS</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Analytics</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <div class="main">
+    <h1>Dashboard Overview</h1>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p>8,245</p>
+      </div>
+      <div class="card">
+        <h3>New Signups</h3>
+        <p>1,029</p>
+      </div>
+      <div class="card">
+        <h3>Monthly Revenue</h3>
+        <p>₹72,450</p>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h3>Revenue Trends</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('revenueChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Revenue (in ₹)',
+          data: [12000, 19000, 30000, 50000, 72000, 68000],
+          borderColor: '#1e90ff',
+          backgroundColor: 'rgba(30,144,255,0.2)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
